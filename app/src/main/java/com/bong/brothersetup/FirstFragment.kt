@@ -69,7 +69,7 @@ class FirstFragment : Fragment() {
     private fun openFilePicker(): Boolean {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "image/jpeg"
+            this.type = "image/*"
         }
 
         startActivityForResult(intent, 1337)
