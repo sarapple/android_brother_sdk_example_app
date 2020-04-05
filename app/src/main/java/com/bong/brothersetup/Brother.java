@@ -44,17 +44,7 @@ public class Brother {
             final PrinterInfo mPrinterInfo = mPrinter.getPrinterInfo();
 
             // Ensure your printer is connected to the same wi-fi used by your device
-            for (NetPrinter printer: printerList) {
-                mPrinterInfo.ipAddress = printer.ipAddress;
-            }
-
-            if (mPrinterInfo.ipAddress == "") {
-                Log.e("app", "Cannot find printer of this type connected to the same wifi" +
-                        "Ensure your manifest contains Internet and External storage permissions.");
-
-                return;
-            }
-
+            mPrinterInfo.ipAddress = "my-printer-ip-address";
             mPrinterInfo.printerModel = PrinterInfo.Model.QL_820NWB;
             mPrinterInfo.port = PrinterInfo.Port.NET;
 
