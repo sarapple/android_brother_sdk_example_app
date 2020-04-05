@@ -1,0 +1,2 @@
+rootProject.name='BrotherSetup'
+include ':app', ':BrotherPrintLibrary'
