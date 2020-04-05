@@ -1,6 +1,5 @@
 package com.bong.brothersetup;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -10,10 +9,7 @@ import com.brother.ptouch.sdk.PrinterInfo;
 import com.brother.ptouch.sdk.LabelInfo;
 import com.brother.ptouch.sdk.PrinterStatus;
 
-import android.os.Looper;
 import android.util.Log;
-
-import java.util.logging.Handler;
 
 public class Brother {
     Context appContext;
