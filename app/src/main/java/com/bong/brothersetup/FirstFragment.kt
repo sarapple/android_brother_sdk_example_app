@@ -78,7 +78,7 @@ class FirstFragment : Fragment() {
 
     private fun printNow(uri: Uri): Boolean {
         // Access java class to print a label
-        val printerAdapter = Brother(this.context)
+        val printerAdapter = Brother()
         getBitmapFromUri(uri)?.also {
             printerAdapter.sendFile(it, context)
         }

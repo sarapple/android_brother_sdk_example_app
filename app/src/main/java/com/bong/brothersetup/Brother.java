@@ -12,11 +12,8 @@ import com.brother.ptouch.sdk.PrinterStatus;
 import android.util.Log;
 
 public class Brother {
-    Context appContext;
-
-    Brother(Context context) {
+    Brother() {
         Log.v("app", "Instantiating Brother Printer");
-        appContext = context;
     }
 
     /**
