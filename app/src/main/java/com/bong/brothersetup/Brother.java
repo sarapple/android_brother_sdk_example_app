@@ -3,13 +3,18 @@ package com.bong.brothersetup;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.brother.ptouch.sdk.CustomPaperInfo;
 import com.brother.ptouch.sdk.NetPrinter;
 import com.brother.ptouch.sdk.Printer;
 import com.brother.ptouch.sdk.PrinterInfo;
 import com.brother.ptouch.sdk.LabelInfo;
 import com.brother.ptouch.sdk.PrinterStatus;
+import com.brother.ptouch.sdk.Unit;
 
 import android.util.Log;
+
+import java.util.List;
+import java.util.Map;
 
 public class Brother {
     Context appContext;
@@ -57,5 +62,46 @@ public class Brother {
 
             printer.endCommunication();
         }
+    }
+
+    /**
+     * Launch the thread to print
+     */
+    public void sendFileToRJ2150(Bitmap bitmap, Context context) {
+        // Specify printer
+        Printer printer = new Printer();
+        PrinterInfo printerInfo = printer.getPrinterInfo();
+        printerInfo.printerModel = PrinterInfo.Model.RJ_2150;
+        printerInfo.port = PrinterInfo.Port.BLUETOOTH;
+        printerInfo.macAddress = "24-71-89-5D-5F-62";
+
+        // Print Settings
+        printerInfo.paperSize = PrinterInfo.PaperSize.CUSTOM;
+        printerInfo.printMode = PrinterInfo.PrintMode.FIT_TO_PAPER;
+        printer.setPrinterInfo(printerInfo);
+
+        // Custom Paper Setting (Case: using Roll paper)
+        float width = 54.0f;
+        float rightMargin = 0.0f;
+        float leftMargin = 0.0f;
+        float topMargin = 0.0f;
+        CustomPaperInfo customPaperInfo = CustomPaperInfo.newCustomRollPaper(printerInfo.printerModel,
+                Unit.Mm,
+                width,
+                rightMargin,
+                leftMargin,
+                topMargin);
+        List<Map<CustomPaperInfo.ErrorParameter, CustomPaperInfo.ErrorDetail>> errors = printerInfo.setCustomPaperInfo(customPaperInfo);
+        if (errors.isEmpty() == false) {
+            System.out.println(errors.toString());
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printBitmap(bitmap, printer);
+            }
+        }).start();
     }
 }
