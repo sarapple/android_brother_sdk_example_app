@@ -80,7 +80,7 @@ class FirstFragment : Fragment() {
         // Access java class to print a label
         val printerAdapter = Brother(this.context)
         getBitmapFromUri(uri)?.also {
-            printerAdapter.sendFile(it)
+            printerAdapter.sendFile(it, context)
         }
 
         return true
